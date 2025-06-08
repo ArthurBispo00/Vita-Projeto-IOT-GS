@@ -56,27 +56,6 @@ Para configurar e rodar o projeto VITA, certifique-se de ter as seguintes ferram
     * **Node.js (versão LTS recomendada):** Ambiente de execução JavaScript.
     * **`npm` ou `yarn`:** Gerenciadores de pacotes Node.js (npm vem com o Node.js).
 
-## 🛠️ Montagem do Hardware
-
-Faça a montagem do hardware de acordo com o seguinte esquemático:
-
-![Esquemático de Conexão do Hardware VITA](image_3341f3.jpg)
-
-**Detalhes das Conexões:**
-
-* **Painel Solar 3W & Bateria:** Conecte o painel solar à bateria para carregamento. A bateria alimentará o ESP32.
-* **ESP32 DEV KIT:** A placa central de controle.
-* **Sensor de Umidade Capacitivo:** Conecte VCC, GND e o pino de saída analógica ao **Pino 34 (GPIO34)** do ESP32.
-* **Sensor de Vibração (SW-420):** Conecte VCC, GND e o pino de saída digital (DO) ao **Pino 25 (GPIO25)** do ESP32.
-* **MPU-6050 (Giroscópio/Acelerômetro):** Conecte VCC (3.3V), GND, **SDA ao Pino 21 (GPIO21)** do ESP32 e **SCL ao Pino 22 (GPIO22)** do ESP32.
-* **Módulo GSM (3G):** Conecte conforme as especificações de energia e comunicação do módulo ao ESP32. (No código atual, a comunicação principal é via Wi-Fi; o módulo GSM pode ser uma funcionalidade futura ou alternativa).
-
----
-
-## 🚀 Guia de Execução
-
-Para rodar o sistema VITA completo, siga as instruções de configuração e execução para cada um dos seus componentes:
-
 ## 🔌 Montagem e Teste do Circuito
 
 Para replicar o hardware do projeto VITA, siga as instruções de montagem abaixo:
@@ -103,11 +82,11 @@ Certifique-se de ter os seguintes componentes em mãos:
 Realize a montagem física do circuito de acordo com o diagrama principal e o esquema detalhado:
 
 * **Diagrama de Conexão Geral:**
-    ![Diagrama de Conexão do Hardware VITA](../../iot-hardware/Diagrama.png)
+    ![Diagrama de Conexão do Hardware VITA](https://raw.githubusercontent.com/ArthurBispo00/Vita-Projeto-IOT-GS/main/iot-hardware/Diagrama.png)
 
 * **Esquemático Detalhado:**
-    Para uma referência mais técnica das ligações, consulte o arquivo do esquemático:
-    [Esquemático do Circuito](C:\Users\arthu\Vita-Projeto-IOT-GS-1\iot-hardware\Esquema.md)
+    Para uma referência mais técnica das ligações, consulte o arquivo do esquemático diretamente no repositório:
+    [Esquemático do Circuito](iot-hardware/Esquema.md)
 
 **Detalhes Adicionais das Conexões:**
 
@@ -123,32 +102,34 @@ Após a montagem, é crucial testar todas as conexões para garantir que não h�
 
 ---
 
-Esta etapa configura o seu dispositivo ESP32 para coletar e enviar dados.
+## 🚀 Guia de Execução
 
-2.  **Abra o Projeto na IDE Arduino:**
+Para rodar o sistema VITA completo, siga as instruções de configuração e execução para cada um dos seus componentes:
+
+1.  **Abra o Projeto na IDE Arduino:**
     * Abra o arquivo `ESP_main.ino` localizado na pasta `ESP32/` na sua IDE Arduino.
 
-3.  **Atualize as Credenciais de Rede:**
+2.  **Atualize as Credenciais de Rede:**
     * Dentro do `ESP_main.ino`, localize as seguintes linhas e substitua `SEU_WIFI` e `SUA_SENHA` pelas credenciais da sua rede Wi-Fi local:
         ```c++
         const char* ssid = "SEU_WIFI";
         const char* password = "SUA_SENHA";
         ```
 
-4.  **Defina o Endereço do Servidor Backend:**
+3.  **Defina o Endereço do Servidor Backend:**
     * Ainda no `ESP_main.ino`, atualize o `serverName` com o endereço IP da máquina onde seu backend FastAPI estará rodando. **É crucial que este IP seja acessível pelo ESP32 na sua rede local.**
         ```c++
         const char* serverName = "http://SEU_IP_DO_BACKEND:8000/api/sensores";
         ```
         Exemplo: Se seu backend estiver rodando em seu computador com IP `192.168.1.100`, use `http://192.168.1.100:8000/api/sensores`.
 
-5.  **Ajustes de Coordenadas (Opcional):**
+4.  **Ajustes de Coordenadas (Opcional):**
     * Se necessário, ajuste `latitude` e `longitude` para as coordenadas geográficas do local onde o sensor será instalado.
 
-6.  **Calibração dos Sensores (Opcional):**
+5.  **Calibração dos Sensores (Opcional):**
     * Os valores de `seco_max`, `molhado_min` para o sensor de umidade e `VELOCIDADE_ANGULAR_LIMIAR_RAD_S` para o MPU-6050 são empíricos. Teste e ajuste-os conforme a calibração real dos seus sensores para otimizar a detecção.
 
-7.  **Faça o Upload do Código:**
+6.  **Faça o Upload do Código:**
     * Conecte seu ESP32 ao computador via USB.
     * Na IDE Arduino, selecione a placa e a porta COM corretas (`Ferramentas > Placa` e `Ferramentas > Porta`).
     * Clique no botão "Upload" para compilar e enviar o firmware para o ESP32.
