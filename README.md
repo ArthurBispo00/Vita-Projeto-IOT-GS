@@ -84,9 +84,28 @@ Realize a montagem física do circuito de acordo com o diagrama principal e o es
 * **Diagrama de Conexão Geral:**
     ![Diagrama de Conexão do Hardware VITA](https://raw.githubusercontent.com/ArthurBispo00/Vita-Projeto-IOT-GS/main/iot-hardware/Diagrama.png)
 
-* **Esquemático Detalhado:**
-    Para uma referência mais técnica das ligações, consulte o arquivo do esquemático diretamente no repositório:
-    [Esquemático do Circuito](iot-hardware/Esquema.md)
+* **Esquemático de Componentes (Visão Simplificada):**
+    ```
+          [ Painel Solar 3W ]
+                  │
+                [ Bateria ]
+                  │
+                [ ESP32 ]
+            ┌─────┴──────────────┐
+            │                    │
+    [Sensor Umidade]     [Sensor Inclinação/
+                               Vibração]
+            │                    │
+            └──────────┬─────────┘
+                       │
+                 [ Módulo GSM ]
+                       │
+                 [ API FastAPI ]
+             ┌─────────┴────────────┐
+    [ Open-Meteo ]             [ Dashboard Next.js ]
+      (Clima)                      (Mapa + Status)
+    ```
+
 
 **Detalhes Adicionais das Conexões:**
 
